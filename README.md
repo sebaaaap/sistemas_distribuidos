@@ -1,23 +1,21 @@
-# Trabajo semestral :p
+# Trabajo semestral 🗿
 
----
 
 ## 📋 Requisitos
 - Python 3.8+
 - Docker
-
----
 
 ## 🚄 Para probar rapido
 1. **Clonar el repositorio**:
    ```bash
 
    git clone https://github.com/sebaaaap/sistemas_distribuidos.git
-   cd sistemas_distribuidos/entrega_1/servicios
    ```
 2. **Construir y levantar servicios**:
-
+   - importante estar en el directororio del compose.yml
     ```bash
+    cd sistemas_distribuidos/entrega_1/servicios
+
     docker compose up --build
     ```
 3. **Probar almacenamiento**:
@@ -25,15 +23,16 @@
     ```bash
     curl -X POST http://localhost:8000/eventos/ -H "Content-Type: application/json" -d '{"tipo": "prueba_atlas", "ubicacion": {"lat": -33.45, "lng": -70.65}}'
     ```
+    - agregale el id mi xan
     ```bash
     curl http://localhost:8000/eventos/<NUEVO_ID>
     ```
 3. **Probar cache**:
-    - colocar id anterior, el q retorna el post
+    - colocar id anterior
     ```bash
-    curl http://localhost:8000/eventos/<NUEVO_ID>
+    curl http://localhost:8001/eventos/<NUEVO_ID>
     ```
-
+--
 ## 🛠️ Para meter mano 
 
 1. **Crear un entorno virtual (recomendado)**:
@@ -58,8 +57,6 @@
    ```bash
    pip install -r requirements.txt
    ```
-
----
 
 ## ▶️ Ejecución
 
