@@ -1,0 +1,35 @@
+# Carpetas comunes de build o compilación
+bin/
+include/
+lib/
+lib64/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+pyvenv.cfg
+
+# Archivos de configuración personales
+*.env
+
+# Archivos de logs o temporales
+*.log
+*.tmp
+*.bak
+
+# Archivos específicos de Python
+*.egg
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# PyCharm
+.idea/
+
