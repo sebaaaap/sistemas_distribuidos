@@ -21,9 +21,7 @@
 3. **Probar almacenamiento**:
     - Esto retorna el id del evento
     ```bash
-    curl -X POST http://localhost:8000/eventos/ \
-  -H "Content-Type: application/json" \
-  -d '{
+    curl -X POST http://localhost:8000/eventos/-H "Content-Type: application/json"-d '{
     "id": "alert-123",
     "uuid": "f35d4177-ca17-4644-a20f-e3425d651178",
     "country": "CI",
