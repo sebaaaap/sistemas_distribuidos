@@ -21,22 +21,7 @@
 3. **Probar almacenamiento**:
     - Esto retorna el id del evento
     ```bash
-    curl -X POST http://localhost:8000/eventos/-H "Content-Type: application/json"-d '{
-    "id": "alert-123",
-    "uuid": "f35d4177-ca17-4644-a20f-e3425d651178",
-    "country": "CI",
-    "city": "Malloco",
-    "street": "Los Aromos",
-    "location": {"x": -70.876047, "y": -33.614422},
-    "type": "ROAD_CLOSED",
-    "subtype": "ROAD_CLOSED_EVENT",
-    "speed": 0,
-    "roadType": 1,
-    "inscale": false,
-    "confidence": 0,
-    "reliability": 6,
-    "pubMillis": 1744739082000
-    }'
+    curl -X POST http://localhost:8000/eventos/ -H "Content-Type: application/json" -d '{"id": "alert-123","uuid": "f35d4177-ca17-4644-a20f-e3425d651178","country": "CI","city": "Malloco","street": "Los Aromos","location": {"x": -70.876047, "y": -33.614422},"type": "ROAD_CLOSED","subtype": "ROAD_CLOSED_EVENT","speed": 0,"roadType": 1,"inscale": false,"confidence": 0,"reliability": 6,"pubMillis": 1744739082000
     ```
     - agregale el id mi xan
     ```bash
