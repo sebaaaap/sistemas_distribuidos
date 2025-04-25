@@ -18,10 +18,13 @@ services:
 
   almacenamiento:
     build: ./almacenamiento
+    volumes:
+    - ./almacenamiento/app:/app
     ports:
       - "8000:8000"
     depends_on:
       - mongodb
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
   cache:
     build: ./cache
@@ -30,6 +33,27 @@ services:
     depends_on:
       - redis
       - almacenamiento
+  
+  generador:
+    build: ./generador_trafico
+
+    volumes:
+      - ./generador_trafico/app:/app
+    environment:
+      - PYTHONUNBUFFERED=1  # Para ver logs inmediatos
+      - DEBUG=True          # Variable para modo desarrollo
+    command: > 
+      sh -c "echo '▶ Iniciando generador (modo desarrollo)...' && 
+      while true; do 
+        python main.py || echo '⚡ Error: Reiniciando...'; 
+        sleep 1; 
+      done"
+    # ports:
+    #   - "9000:9000"
+    depends_on:
+      - almacenamiento
+      - cache 
+
 
 volumes:
   mongodb_data:

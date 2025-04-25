@@ -17,7 +17,25 @@ async def crear_evento(evento: EventoReal):
 
 @app.get("/")
 async def crear_evento():
-    return { "messagge": "hola gai"}
+    return { "messagge": "hola gai 123456"}
+
+@app.get("/eventos/getall_ids")
+async def get_all():
+    try:
+        # Obtener todos los documentos y extraer solo el campo "_id"
+        eventos = events_collection.find({}, {"_id": 1}) # Proyección: solo el _id)
+        
+        # Convertir los ObjectId a strings (MongoDB devuelve ObjectId por defecto)
+        eventos_ids = [str(evento["_id"]) for evento in eventos]
+        
+        return { "ids" : eventos_ids}
+        print(eventos)
+        # return {"lista": eventos}
+    
+    except Exception as e:
+        print(f"Error: {e}")  # Para debug
+        raise HTTPException(status_code=500, detail=f"Error al obtener eventos: {str(e)}")
+        
 
 @app.get("/eventos/{evento_id}")
 async def leer_evento(evento_id: str):
