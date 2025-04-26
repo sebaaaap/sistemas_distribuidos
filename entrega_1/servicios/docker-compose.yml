@@ -49,7 +49,17 @@ services:
       - almacenamiento
       - cache
     command: >
-      sh -c "python main.py --duracion 1"
+      sh -c "python main.py --duracion 1" 
+
+  scraper:
+   build:
+    context: ./scraper
+   environment:  
+    - URL_MONGODB=http://almacenamiento:8000/eventos
+    - MAX_EVENTOS=10000  
+   depends_on:
+    - almacenamiento
+    
 
 
 volumes:

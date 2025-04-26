@@ -6,7 +6,7 @@ from datetime import datetime
 
 app = FastAPI()
 
-@app.post("/eventos/")
+@app.post("/eventos")
 async def crear_evento(evento: EventoReal):
     # Convertimos a dict y añadimos fecha de creación
     evento_data = evento.dict()
