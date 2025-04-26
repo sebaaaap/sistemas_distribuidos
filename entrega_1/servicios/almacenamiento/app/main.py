@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
-from database import events_collection
-from models import EventoReal
+from app.database import events_collection
+from app.models import EventoReal
 from bson import ObjectId
 from datetime import datetime
 
