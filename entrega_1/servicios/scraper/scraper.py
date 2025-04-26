@@ -122,6 +122,5 @@ def main():
 
     print(f"\n✅ Finalizado. {len(eventos_totales)} eventos procesados.")
 
-# ✅ Corrección en el if final
 if __name__ == "__main__":
     main()
