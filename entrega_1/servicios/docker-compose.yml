@@ -1,3 +1,4 @@
+version: '3.8'
 
 services:
   mongodb:
@@ -15,11 +16,10 @@ services:
     volumes:
       - redis_data:/data
     
-
   almacenamiento:
     build: ./almacenamiento
     volumes:
-    - ./almacenamiento/app:/app
+      - ./almacenamiento/app:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -35,24 +35,21 @@ services:
       - almacenamiento
   
   generador:
-    build: ./generador_trafico
-
-    volumes:
-      - ./generador_trafico/app:/app
+    build:
+      context: ./generador_trafico
     environment:
-      - PYTHONUNBUFFERED=1  # Para ver logs inmediatos
-      - DEBUG=True          # Variable para modo desarrollo
-    command: > 
-      sh -c "echo '▶ Iniciando generador (modo desarrollo)...' && 
-      while true; do 
-        python main.py || echo '⚡ Error: Reiniciando...'; 
-        sleep 1; 
-      done"
-    # ports:
-    #   - "9000:9000"
+      - PYTHONUNBUFFERED=1
+      - MIN_IDS=2
+      - CACHE_URL=http://cache:8001/eventos
+      - ALMACENAMIENTO_URL=http://almacenamiento:8000/eventos/getall_ids
+    volumes:
+      - ./generador_trafico/app:/app  # Mapeo consistente
+    # restart: unless-stopped
     depends_on:
       - almacenamiento
-      - cache 
+      - cache
+    command: >
+      sh -c "python main.py --duracion 1"
 
 
 volumes:
