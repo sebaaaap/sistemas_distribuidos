@@ -6,6 +6,7 @@ from datetime import datetime
 
 app = FastAPI()
 
+#prueba xdddd
 
 @app.post("/eventos")
 async def crear_evento(evento: EventoReal):
