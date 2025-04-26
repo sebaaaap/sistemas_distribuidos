@@ -15,6 +15,7 @@ env/
 ENV/
 pyvenv.cfg
 
+*estadisticas/
 # Archivos de configuración personales
 *.env
 
