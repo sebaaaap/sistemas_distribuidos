@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import os
 
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongodb:27017")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 client = MongoClient(MONGO_URI)
-db = client.trafico_rm
-events_collection = db.events
+db = client.get_database(os.getenv("MONGO_DB", "eventos"))
+events_collection = db.get_collection(os.getenv("MONGO_COLLECTION", "intento_1"))
