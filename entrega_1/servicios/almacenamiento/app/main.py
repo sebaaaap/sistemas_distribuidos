@@ -6,6 +6,7 @@ from datetime import datetime
 
 app = FastAPI()
 
+
 @app.post("/eventos")
 async def crear_evento(evento: EventoReal):
     # Convertimos a dict y añadimos fecha de creación
@@ -48,3 +49,8 @@ async def leer_evento(evento_id: str):
     except:
         pass  
     raise HTTPException(status_code=404, detail="Evento no encontrado")
+
+
+
+
+
