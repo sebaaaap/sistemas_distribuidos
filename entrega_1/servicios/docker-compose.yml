@@ -9,8 +9,8 @@ services:
   #     - mongodb_data:/data/db
 
   redis:
-    image: redis:latest
-    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    image: redis:latest                  # descomentar y comentar la otra para cambiar la politica:
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru # allkeys-lfu
     ports:
       - "6379:6379"
     volumes:
