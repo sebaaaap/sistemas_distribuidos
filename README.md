@@ -11,8 +11,7 @@
    ```bash
    git clone https://github.com/sebaaaap/sistemas_distribuidos.git
    ```
-2. **Construir y levantar servicios**:
-   - importante estar en el directororio del compose.yml
+2. **Importante estar en el directororio del compose.yml**:
     ```bash
     cd sistemas_distribuidos/entrega_1/servicios
     ```
@@ -29,31 +28,31 @@
    docker compose up --build
    ```
 5. **Ver estadisticas generales y por evento**
-   anda a "generador_trafico/app/estadisticas"
+   - anda a "generador_trafico/app/estadisticas"
 
---
+
 ## 🛠️ Para meter mano 
 
 1. **Ajustar la cantidad de eventos a scrapear(10eventos Default)**:
-Ir al .yml, ubicar el servicio "scraper" y cambiar valor:
+ - Ir al .yml, ubicar el servicio "scraper" y cambiar valor:
 ```docker-compose.yml
 environment:  
     - MAX_EVENTOS=10  # N° de eventos que deseas scrapear
 ```
 2. **Ajustar politica de remosion(LRU-LFU)**:
-Ir al .yml, ubicar el servicio "redis" y cambiar valor "lru" por "lfu":
+ - Ir al .yml, ubicar el servicio "redis" y cambiar valor "lru" por "lfu":
 ```docker-compose.yml
 command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru # allkeys-lfu
 ```
-4. **Ajustar TTL(30min default)**:
-Ir al .yml, ubicar el servicio "cache" y cambiar valor (1800 -> 30min, 3600 -> 1hra):
+3. **Ajustar TTL(30min default)**:
+ - Ir al .yml, ubicar el servicio "cache" y cambiar valor (1800 -> 30min, 3600 -> 1hra):
 ```docker-compose.yml
 environment:
     - TTL_CACHE=1800
 ```
 
 4. **Ajustar tiempo del genereador de trafico(1min default)**:
-Ir al .yml, ubicar el servicio "generador" y cambiar valor:
+ - Ir al .yml, ubicar el servicio "generador" y cambiar valor:
 ```docker-compose.yml
 command: >
       sh -c "python main.py --duracion 1" 
