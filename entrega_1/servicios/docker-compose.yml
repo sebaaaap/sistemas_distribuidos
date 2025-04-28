@@ -34,6 +34,8 @@ services:
     depends_on:
       - redis
       - almacenamiento
+    environment:
+    - TTL_CACHE=1800
   
     
   almacenamiento:
