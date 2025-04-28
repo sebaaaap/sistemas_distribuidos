@@ -6,6 +6,7 @@ from datetime import datetime
 
 app = FastAPI()
 
+#prueba xdddd
 
 @app.post("/eventos")
 async def crear_evento(evento: EventoReal):
@@ -18,7 +19,7 @@ async def crear_evento(evento: EventoReal):
 
 @app.get("/")
 async def crear_evento():
-    return { "messagge": "hola gai 123456"}
+    return { "messagge": "ola sebita "}
 
 @app.get("/eventos/getall_ids")
 async def get_all():

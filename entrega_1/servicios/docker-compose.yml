@@ -54,7 +54,7 @@ services:
       context: ./generador_trafico
     environment:
       - PYTHONUNBUFFERED=1
-      - MIN_IDS=2
+      - MIN_IDS=10000
       - CACHE_URL=http://cache:8001/eventos
       - ALMACENAMIENTO_URL=http://almacenamiento:8000/eventos/getall_ids
     volumes:
