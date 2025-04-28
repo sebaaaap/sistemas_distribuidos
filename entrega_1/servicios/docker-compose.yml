@@ -50,7 +50,7 @@ services:
       context: ./generador_trafico
     environment:
       - PYTHONUNBUFFERED=1
-      - MIN_IDS=2
+      - MIN_IDS=10000
       - CACHE_URL=http://cache:8001/eventos
       - ALMACENAMIENTO_URL=http://almacenamiento:8000/eventos/getall_ids
     volumes:
@@ -60,14 +60,14 @@ services:
       - almacenamiento
       - cache
     command: >
-      sh -c "python main.py --duracion 1" 
+      sh -c "python main.py --duracion 5" 
 
   scraper:
    build:
     context: ./scraper
    environment:  
     - URL_MONGODB=http://almacenamiento:8000/eventos
-    - MAX_EVENTOS=10 
+    - MAX_EVENTOS=10
    depends_on:
     - almacenamiento
     
