@@ -1,21 +1,15 @@
 version: '3.8'
 
 services:
+
+  # se comento esto ya que incorporamos mongobdAtlas
   # mongodb:
   #   image: mongo:latest
   #   ports:
   #     - "27017:27017"
   #   volumes:
   #     - mongodb_data:/data/db
-
-  redis:
-    image: redis:latest                  # descomentar y comentar la otra para cambiar la politica:
-    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru # allkeys-lfu
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    
+  
   # almacenamiento:
   #   build: ./almacenamiento
   #   volumes:
@@ -24,6 +18,23 @@ services:
   #     - "8000:8000"
   #   depends_on:
   #     - mongodb
+
+  redis:                                        #LRU y LFU
+    image: redis:latest               # descomentar y comentar la otra para cambiar la politica:
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru # allkeys-lfu
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  cache:
+    build: ./cache
+    ports:
+      - "8001:8001"
+    depends_on:
+      - redis
+      - almacenamiento
+  
     
   almacenamiento:
     build: ./almacenamiento
@@ -36,14 +47,7 @@ services:
       - MONGO_CLUSTER=${MONGO_CLUSTER}
       - MONGO_DB=${MONGO_DB}
       - MONGO_COLLECTION=${MONGO_COLLECTION}
-      
-  cache:
-    build: ./cache
-    ports:
-      - "8001:8001"
-    depends_on:
-      - redis
-      - almacenamiento
+    
   
   generador:
     build:
@@ -55,24 +59,25 @@ services:
       - ALMACENAMIENTO_URL=http://almacenamiento:8000/eventos/getall_ids
     volumes:
       - ./generador_trafico/app:/app  # Mapeo consistente
-    # restart: unless-stopped
+    # comando para ejecutar el generador, ajustar valor a gusto, brr
+    command: >
+      sh -c "python main.py --duracion 1" 
     depends_on:
       - almacenamiento
       - cache
-    command: >
-      sh -c "python main.py --duracion 1" 
+    
 
   scraper:
    build:
     context: ./scraper
    environment:  
     - URL_MONGODB=http://almacenamiento:8000/eventos
-    - MAX_EVENTOS=10 
+    - MAX_EVENTOS=10  # N° de eventos que deseas scrapear
    depends_on:
     - almacenamiento
     
 
 
 volumes:
-  mongodb_data:
+  # mongodb_data:
   redis_data:
