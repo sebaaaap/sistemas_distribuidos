@@ -18,8 +18,8 @@ async def leer_evento_cache(evento_id: str):
     response = requests.get(f"{STORAGE_SERVICE_URL}/eventos/{evento_id}")
     if response.status_code == 200:
         evento = response.json()
-        # cache.set(evento_id, str(evento), ex=3600)  # TTL de 1 hora
-        cache.set(evento_id, str(evento))  # sin TTL
+        cache.set(evento_id, str(evento), ex=1800)  # TTL de media hora
+        # cache.set(evento_id, str(evento))  # sin TTL
         # return {"data": evento, "source": "tuve q ir a buscar al BACK mi loko:("}
         return {"message" : "BACKEND"}
     
