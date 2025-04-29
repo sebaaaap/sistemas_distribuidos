@@ -9,7 +9,7 @@ import os
 import glob
 
 from distribuciones import generar_intervalo  # Importar el generador corregido
-
+from distribuciones import generar_id_zipf
 # Configuración de URLs
 CACHE_URL = os.getenv('CACHE_URL', "http://cache:8001/eventos")
 ALMACENAMIENTO_URL = os.getenv('ALMACENAMIENTO_URL', "http://almacenamiento:8000/eventos/getall_ids")
@@ -143,7 +143,9 @@ def generar_trafico(duracion_minutos=DURACION_DEFAULT):
     
     try:
         while not hora_fin or datetime.now() < hora_fin:
-            id_consulta = random.choice(sample_ids)
+            # id_consulta = random.choice(sample_ids)
+            id_consulta = generar_id_zipf(sample_ids) ##usa la distro mas realista
+
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             
             try:
