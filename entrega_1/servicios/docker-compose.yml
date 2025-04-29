@@ -21,7 +21,7 @@ services:
 
   redis:                                        #LRU y LFU
     image: redis:latest               # descomentar y comentar la otra para cambiar la politica:
-    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru # allkeys-lfu
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lfu #allkeys-lru  
     ports:
       - "6379:6379"
     volumes:
@@ -63,7 +63,7 @@ services:
       - ./generador_trafico/app:/app  # Mapeo consistente
     # comando para ejecutar el generador, ajustar valor a gusto, brr
     command: >
-      sh -c "python main.py --duracion 1" 
+      sh -c "python main.py --duracion 180" 
     depends_on:
       - almacenamiento
       - cache

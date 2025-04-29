@@ -16,7 +16,7 @@ ALMACENAMIENTO_URL = os.getenv('ALMACENAMIENTO_URL', "http://almacenamiento:8000
 
 # Configuración de parámetros
 MIN_IDS = int(os.getenv('MIN_IDS', 1))
-DURACION_DEFAULT = int(os.getenv('DURACION_MINUTOS', 0))
+DURACION_DEFAULT = int(os.getenv('DURACION_MINUTOS', 180))
 
 def limpiar_archivos_anteriores():
     for f in glob.glob('estadisticas_*.json') + glob.glob('metricas_*.json'):
