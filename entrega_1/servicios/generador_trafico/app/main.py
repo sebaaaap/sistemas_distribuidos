@@ -139,12 +139,12 @@ def generar_trafico(duracion_minutos=DURACION_DEFAULT):
     print(f"\n Iniciando generador ({duracion_minutos} min) | IDs disponibles: {len(sample_ids)}")
     print(f" Inicio: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     if hora_fin:
-        print(f"⏳ Fin estimado: {hora_fin.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"⏳ git reset --hard origin/mainFin estimado: {hora_fin.strftime('%Y-%m-%d %H:%M:%S')}")
     
     try:
         while not hora_fin or datetime.now() < hora_fin:
-            # id_consulta = random.choice(sample_ids)
-            id_consulta = generar_id_zipf(sample_ids) ##usa la distro mas realista
+            id_consulta = random.choice(sample_ids)
+            # id_consulta = generar_id_zipf(sample_ids) ##usa la distro mas realista
 
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             
