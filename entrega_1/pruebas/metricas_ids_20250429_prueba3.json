@@ -1,0 +1,9 @@
+{
+  "ids_mas_consultados": [],
+  "resumen": {
+    "total_ids_unicos": 0,
+    "promedio_consultas_por_id": 0,
+    "tiempo_ejecucion_minutos": 180,
+    "cache_hit_global": 0
+  }
+}
