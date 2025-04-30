@@ -1,0 +1,1054 @@
+{
+  "ids_mas_consultados": [
+    {
+      "id": "680c7168b175d2b623a26178",
+      "total": 4272,
+      "cache_hits": 4254,
+      "cache_misses": 18,
+      "primer_uso": "2025-04-29 16:07:29",
+      "ultimo_uso": "2025-04-29 19:07:22",
+      "ratio_cache": 0.9957865168539326
+    },
+    {
+      "id": "680c7168b175d2b623a26179",
+      "total": 1085,
+      "cache_hits": 1067,
+      "cache_misses": 18,
+      "primer_uso": "2025-04-29 16:07:50",
+      "ultimo_uso": "2025-04-29 19:07:23",
+      "ratio_cache": 0.9834101382488479
+    },
+    {
+      "id": "680c7168b175d2b623a2617a",
+      "total": 472,
+      "cache_hits": 454,
+      "cache_misses": 18,
+      "primer_uso": "2025-04-29 16:07:29",
+      "ultimo_uso": "2025-04-29 19:07:16",
+      "ratio_cache": 0.961864406779661
+    },
+    {
+      "id": "680c7168b175d2b623a2617b",
+      "total": 284,
+      "cache_hits": 267,
+      "cache_misses": 17,
+      "primer_uso": "2025-04-29 16:08:27",
+      "ultimo_uso": "2025-04-29 19:05:24",
+      "ratio_cache": 0.9401408450704225
+    },
+    {
+      "id": "680c7168b175d2b623a2617c",
+      "total": 155,
+      "cache_hits": 138,
+      "cache_misses": 17,
+      "primer_uso": "2025-04-29 16:08:17",
+      "ultimo_uso": "2025-04-29 19:06:10",
+      "ratio_cache": 0.8903225806451613
+    },
+    {
+      "id": "680c7168b175d2b623a2617d",
+      "total": 113,
+      "cache_hits": 97,
+      "cache_misses": 16,
+      "primer_uso": "2025-04-29 16:10:46",
+      "ultimo_uso": "2025-04-29 19:07:05",
+      "ratio_cache": 0.8584070796460177
+    },
+    {
+      "id": "680c7168b175d2b623a2617e",
+      "total": 78,
+      "cache_hits": 63,
+      "cache_misses": 15,
+      "primer_uso": "2025-04-29 16:11:08",
+      "ultimo_uso": "2025-04-29 19:04:04",
+      "ratio_cache": 0.8076923076923077
+    },
+    {
+      "id": "680c7169b175d2b623a2617f",
+      "total": 66,
+      "cache_hits": 52,
+      "cache_misses": 14,
+      "primer_uso": "2025-04-29 16:07:32",
+      "ultimo_uso": "2025-04-29 19:04:25",
+      "ratio_cache": 0.7878787878787878
+    },
+    {
+      "id": "680c7169b175d2b623a26180",
+      "total": 50,
+      "cache_hits": 35,
+      "cache_misses": 15,
+      "primer_uso": "2025-04-29 16:11:48",
+      "ultimo_uso": "2025-04-29 19:06:56",
+      "ratio_cache": 0.7
+    },
+    {
+      "id": "680c7169b175d2b623a26181",
+      "total": 34,
+      "cache_hits": 21,
+      "cache_misses": 13,
+      "primer_uso": "2025-04-29 16:10:16",
+      "ultimo_uso": "2025-04-29 19:06:37",
+      "ratio_cache": 0.6176470588235294
+    },
+    {
+      "id": "680d1e96551f53c2925405a2",
+      "total": 31,
+      "cache_hits": 20,
+      "cache_misses": 11,
+      "primer_uso": "2025-04-29 16:08:19",
+      "ultimo_uso": "2025-04-29 19:06:57",
+      "ratio_cache": 0.6451612903225806
+    },
+    {
+      "id": "680d1e96551f53c2925405a4",
+      "total": 22,
+      "cache_hits": 13,
+      "cache_misses": 9,
+      "primer_uso": "2025-04-29 16:10:51",
+      "ultimo_uso": "2025-04-29 18:59:18",
+      "ratio_cache": 0.5909090909090909
+    },
+    {
+      "id": "680d1e96551f53c2925405a3",
+      "total": 22,
+      "cache_hits": 13,
+      "cache_misses": 9,
+      "primer_uso": "2025-04-29 16:13:57",
+      "ultimo_uso": "2025-04-29 18:43:06",
+      "ratio_cache": 0.5909090909090909
+    },
+    {
+      "id": "680d279574bb0611bea8ccd2",
+      "total": 21,
+      "cache_hits": 12,
+      "cache_misses": 9,
+      "primer_uso": "2025-04-29 16:21:34",
+      "ultimo_uso": "2025-04-29 19:01:57",
+      "ratio_cache": 0.5714285714285714
+    },
+    {
+      "id": "680d279474bb0611bea8cccf",
+      "total": 20,
+      "cache_hits": 10,
+      "cache_misses": 10,
+      "primer_uso": "2025-04-29 16:16:56",
+      "ultimo_uso": "2025-04-29 19:01:41",
+      "ratio_cache": 0.5
+    },
+    {
+      "id": "680d279474bb0611bea8ccd1",
+      "total": 18,
+      "cache_hits": 9,
+      "cache_misses": 9,
+      "primer_uso": "2025-04-29 16:12:24",
+      "ultimo_uso": "2025-04-29 19:02:14",
+      "ratio_cache": 0.5
+    },
+    {
+      "id": "680d279574bb0611bea8ccd3",
+      "total": 18,
+      "cache_hits": 11,
+      "cache_misses": 7,
+      "primer_uso": "2025-04-29 16:23:45",
+      "ultimo_uso": "2025-04-29 19:02:55",
+      "ratio_cache": 0.6111111111111112
+    },
+    {
+      "id": "680d279574bb0611bea8ccd4",
+      "total": 15,
+      "cache_hits": 6,
+      "cache_misses": 9,
+      "primer_uso": "2025-04-29 16:23:47",
+      "ultimo_uso": "2025-04-29 18:58:20",
+      "ratio_cache": 0.4
+    },
+    {
+      "id": "680d279474bb0611bea8ccd0",
+      "total": 13,
+      "cache_hits": 7,
+      "cache_misses": 6,
+      "primer_uso": "2025-04-29 16:34:58",
+      "ultimo_uso": "2025-04-29 19:06:30",
+      "ratio_cache": 0.5384615384615384
+    },
+    {
+      "id": "680d279574bb0611bea8ccd7",
+      "total": 12,
+      "cache_hits": 5,
+      "cache_misses": 7,
+      "primer_uso": "2025-04-29 16:17:17",
+      "ultimo_uso": "2025-04-29 18:56:00",
+      "ratio_cache": 0.4166666666666667
+    },
+    {
+      "id": "680d3117c45b74e3c78fa05d",
+      "total": 11,
+      "cache_hits": 5,
+      "cache_misses": 6,
+      "primer_uso": "2025-04-29 16:19:37",
+      "ultimo_uso": "2025-04-29 18:18:56",
+      "ratio_cache": 0.45454545454545453
+    },
+    {
+      "id": "680d279574bb0611bea8ccd5",
+      "total": 9,
+      "cache_hits": 2,
+      "cache_misses": 7,
+      "primer_uso": "2025-04-29 16:26:12",
+      "ultimo_uso": "2025-04-29 19:05:40",
+      "ratio_cache": 0.2222222222222222
+    },
+    {
+      "id": "680d3117c45b74e3c78fa05b",
+      "total": 9,
+      "cache_hits": 4,
+      "cache_misses": 5,
+      "primer_uso": "2025-04-29 16:27:11",
+      "ultimo_uso": "2025-04-29 18:22:49",
+      "ratio_cache": 0.4444444444444444
+    },
+    {
+      "id": "680d3853d0fae710aab35e3a",
+      "total": 7,
+      "cache_hits": 2,
+      "cache_misses": 5,
+      "primer_uso": "2025-04-29 16:11:37",
+      "ultimo_uso": "2025-04-29 18:54:56",
+      "ratio_cache": 0.2857142857142857
+    },
+    {
+      "id": "680d3118c45b74e3c78fa061",
+      "total": 7,
+      "cache_hits": 2,
+      "cache_misses": 5,
+      "primer_uso": "2025-04-29 17:08:22",
+      "ultimo_uso": "2025-04-29 18:58:24",
+      "ratio_cache": 0.2857142857142857
+    },
+    {
+      "id": "680d279574bb0611bea8ccd8",
+      "total": 6,
+      "cache_hits": 2,
+      "cache_misses": 4,
+      "primer_uso": "2025-04-29 16:49:25",
+      "ultimo_uso": "2025-04-29 19:04:27",
+      "ratio_cache": 0.3333333333333333
+    },
+    {
+      "id": "680d3117c45b74e3c78fa05f",
+      "total": 6,
+      "cache_hits": 2,
+      "cache_misses": 4,
+      "primer_uso": "2025-04-29 17:02:54",
+      "ultimo_uso": "2025-04-29 18:43:40",
+      "ratio_cache": 0.3333333333333333
+    },
+    {
+      "id": "680d3853d0fae710aab35e38",
+      "total": 6,
+      "cache_hits": 2,
+      "cache_misses": 4,
+      "primer_uso": "2025-04-29 17:06:38",
+      "ultimo_uso": "2025-04-29 18:53:57",
+      "ratio_cache": 0.3333333333333333
+    },
+    {
+      "id": "680e8158f903fb026aedf355",
+      "total": 5,
+      "cache_hits": 0,
+      "cache_misses": 5,
+      "primer_uso": "2025-04-29 16:15:58",
+      "ultimo_uso": "2025-04-29 19:07:12",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3117c45b74e3c78fa05c",
+      "total": 5,
+      "cache_hits": 1,
+      "cache_misses": 4,
+      "primer_uso": "2025-04-29 16:16:36",
+      "ultimo_uso": "2025-04-29 18:29:39",
+      "ratio_cache": 0.2
+    },
+    {
+      "id": "680d279574bb0611bea8ccd6",
+      "total": 5,
+      "cache_hits": 3,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:26:02",
+      "ultimo_uso": "2025-04-29 18:35:31",
+      "ratio_cache": 0.6
+    },
+    {
+      "id": "680d3118c45b74e3c78fa062",
+      "total": 5,
+      "cache_hits": 2,
+      "cache_misses": 3,
+      "primer_uso": "2025-04-29 16:49:57",
+      "ultimo_uso": "2025-04-29 19:02:30",
+      "ratio_cache": 0.4
+    },
+    {
+      "id": "680d3118c45b74e3c78fa060",
+      "total": 4,
+      "cache_hits": 1,
+      "cache_misses": 3,
+      "primer_uso": "2025-04-29 16:39:19",
+      "ultimo_uso": "2025-04-29 19:02:40",
+      "ratio_cache": 0.25
+    },
+    {
+      "id": "680e8159f903fb026aedf357",
+      "total": 4,
+      "cache_hits": 1,
+      "cache_misses": 3,
+      "primer_uso": "2025-04-29 17:34:43",
+      "ultimo_uso": "2025-04-29 19:02:33",
+      "ratio_cache": 0.25
+    },
+    {
+      "id": "680d3853d0fae710aab35e37",
+      "total": 4,
+      "cache_hits": 2,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 17:38:20",
+      "ultimo_uso": "2025-04-29 18:38:47",
+      "ratio_cache": 0.5
+    },
+    {
+      "id": "680d3853d0fae710aab35e39",
+      "total": 3,
+      "cache_hits": 0,
+      "cache_misses": 3,
+      "primer_uso": "2025-04-29 16:09:17",
+      "ultimo_uso": "2025-04-29 18:03:40",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf35d",
+      "total": 3,
+      "cache_hits": 0,
+      "cache_misses": 3,
+      "primer_uso": "2025-04-29 16:24:47",
+      "ultimo_uso": "2025-04-29 19:02:38",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3853d0fae710aab35e3b",
+      "total": 3,
+      "cache_hits": 0,
+      "cache_misses": 3,
+      "primer_uso": "2025-04-29 16:25:27",
+      "ultimo_uso": "2025-04-29 17:33:12",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3853d0fae710aab35e36",
+      "total": 3,
+      "cache_hits": 1,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 17:30:47",
+      "ultimo_uso": "2025-04-29 18:10:14",
+      "ratio_cache": 0.3333333333333333
+    },
+    {
+      "id": "680e815ef903fb026aedf38d",
+      "total": 3,
+      "cache_hits": 0,
+      "cache_misses": 3,
+      "primer_uso": "2025-04-29 17:32:44",
+      "ultimo_uso": "2025-04-29 18:26:02",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf365",
+      "total": 3,
+      "cache_hits": 1,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 17:34:47",
+      "ultimo_uso": "2025-04-29 18:40:33",
+      "ratio_cache": 0.3333333333333333
+    },
+    {
+      "id": "680e8159f903fb026aedf356",
+      "total": 3,
+      "cache_hits": 1,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 17:56:46",
+      "ultimo_uso": "2025-04-29 18:28:20",
+      "ratio_cache": 0.3333333333333333
+    },
+    {
+      "id": "680e815ef903fb026aedf395",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:07:55",
+      "ultimo_uso": "2025-04-29 17:46:50",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf363",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:10:13",
+      "ultimo_uso": "2025-04-29 16:48:46",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8159f903fb026aedf359",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:10:31",
+      "ultimo_uso": "2025-04-29 18:09:05",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3853d0fae710aab35e3e",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:21:02",
+      "ultimo_uso": "2025-04-29 18:28:22",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815bf903fb026aedf36e",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:42:34",
+      "ultimo_uso": "2025-04-29 19:07:17",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3853d0fae710aab35e3d",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:51:20",
+      "ultimo_uso": "2025-04-29 18:08:41",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf361",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:52:57",
+      "ultimo_uso": "2025-04-29 18:07:36",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3118c45b74e3c78fa064",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:56:29",
+      "ultimo_uso": "2025-04-29 18:01:20",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815df903fb026aedf384",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 16:57:24",
+      "ultimo_uso": "2025-04-29 17:37:10",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3852d0fae710aab35e35",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 17:14:21",
+      "ultimo_uso": "2025-04-29 18:47:52",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3118c45b74e3c78fa063",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 17:23:19",
+      "ultimo_uso": "2025-04-29 18:46:29",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8174f903fb026aedf466",
+      "total": 2,
+      "cache_hits": 1,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:28:12",
+      "ultimo_uso": "2025-04-29 17:28:59",
+      "ratio_cache": 0.5
+    },
+    {
+      "id": "680e815ff903fb026aedf39a",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 17:56:05",
+      "ultimo_uso": "2025-04-29 18:39:50",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680d3117c45b74e3c78fa05e",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 18:15:55",
+      "ultimo_uso": "2025-04-29 18:41:07",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8159f903fb026aedf35a",
+      "total": 2,
+      "cache_hits": 0,
+      "cache_misses": 2,
+      "primer_uso": "2025-04-29 18:18:37",
+      "ultimo_uso": "2025-04-29 18:43:45",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e816ef903fb026aedf422",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:14:06",
+      "ultimo_uso": "2025-04-29 16:14:06",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815cf903fb026aedf376",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:18:40",
+      "ultimo_uso": "2025-04-29 16:18:40",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf366",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:18:48",
+      "ultimo_uso": "2025-04-29 16:18:48",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815bf903fb026aedf372",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:23:33",
+      "ultimo_uso": "2025-04-29 16:23:33",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8179f903fb026aedf485",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:23:51",
+      "ultimo_uso": "2025-04-29 16:23:51",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815ef903fb026aedf393",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:25:53",
+      "ultimo_uso": "2025-04-29 16:25:53",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e816cf903fb026aedf41a",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:27:11",
+      "ultimo_uso": "2025-04-29 16:27:11",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815bf903fb026aedf36f",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:28:55",
+      "ultimo_uso": "2025-04-29 16:28:55",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8167f903fb026aedf3dd",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:36:05",
+      "ultimo_uso": "2025-04-29 16:36:05",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e81aff903fb026aedf6b0",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:36:45",
+      "ultimo_uso": "2025-04-29 16:36:45",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf360",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:39:03",
+      "ultimo_uso": "2025-04-29 16:39:03",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8164f903fb026aedf3bd",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:43:25",
+      "ultimo_uso": "2025-04-29 16:43:25",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e816ff903fb026aedf42b",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:44:28",
+      "ultimo_uso": "2025-04-29 16:44:28",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e84dff903fb026aee16eb",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:44:36",
+      "ultimo_uso": "2025-04-29 16:44:36",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815cf903fb026aedf377",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:46:29",
+      "ultimo_uso": "2025-04-29 16:46:29",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8167f903fb026aedf3e7",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:47:11",
+      "ultimo_uso": "2025-04-29 16:47:11",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815ef903fb026aedf398",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:50:06",
+      "ultimo_uso": "2025-04-29 16:50:06",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e81fdf903fb026aedf9dc",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 16:55:09",
+      "ultimo_uso": "2025-04-29 16:55:09",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e81b5f903fb026aedf6e3",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:01:04",
+      "ultimo_uso": "2025-04-29 17:01:04",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815cf903fb026aedf37e",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:02:35",
+      "ultimo_uso": "2025-04-29 17:02:35",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815df903fb026aedf382",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:04:26",
+      "ultimo_uso": "2025-04-29 17:04:26",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8166f903fb026aedf3db",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:13:57",
+      "ultimo_uso": "2025-04-29 17:13:57",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e842bf903fb026aee0fc2",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:17:00",
+      "ultimo_uso": "2025-04-29 17:17:00",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815ef903fb026aedf397",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:18:17",
+      "ultimo_uso": "2025-04-29 17:18:17",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8171f903fb026aedf442",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:19:26",
+      "ultimo_uso": "2025-04-29 17:19:26",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e81a0f903fb026aedf60d",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:21:53",
+      "ultimo_uso": "2025-04-29 17:21:53",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815df903fb026aedf386",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:30:52",
+      "ultimo_uso": "2025-04-29 17:30:52",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815bf903fb026aedf36c",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:31:13",
+      "ultimo_uso": "2025-04-29 17:31:13",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8199f903fb026aedf5cf",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:33:08",
+      "ultimo_uso": "2025-04-29 17:33:08",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815bf903fb026aedf36d",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:34:17",
+      "ultimo_uso": "2025-04-29 17:34:17",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8164f903fb026aedf3c3",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:37:27",
+      "ultimo_uso": "2025-04-29 17:37:27",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815ef903fb026aedf396",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:38:36",
+      "ultimo_uso": "2025-04-29 17:38:36",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8159f903fb026aedf358",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:39:27",
+      "ultimo_uso": "2025-04-29 17:39:27",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8169f903fb026aedf3f5",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 17:50:40",
+      "ultimo_uso": "2025-04-29 17:50:40",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e81f7f903fb026aedf99a",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:03:39",
+      "ultimo_uso": "2025-04-29 18:03:39",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8165f903fb026aedf3cc",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:05:56",
+      "ultimo_uso": "2025-04-29 18:05:56",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815cf903fb026aedf379",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:07:56",
+      "ultimo_uso": "2025-04-29 18:07:56",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8167f903fb026aedf3e3",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:11:05",
+      "ultimo_uso": "2025-04-29 18:11:05",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8165f903fb026aedf3cf",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:11:17",
+      "ultimo_uso": "2025-04-29 18:11:17",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e82c9f903fb026aee01df",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:16:10",
+      "ultimo_uso": "2025-04-29 18:16:10",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8159f903fb026aedf35b",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:17:50",
+      "ultimo_uso": "2025-04-29 18:17:50",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815cf903fb026aedf378",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:22:18",
+      "ultimo_uso": "2025-04-29 18:22:18",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8166f903fb026aedf3d2",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:23:44",
+      "ultimo_uso": "2025-04-29 18:23:44",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8316f903fb026aee04e9",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:25:44",
+      "ultimo_uso": "2025-04-29 18:25:44",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf35c",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:27:56",
+      "ultimo_uso": "2025-04-29 18:27:56",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e816bf903fb026aedf414",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:28:17",
+      "ultimo_uso": "2025-04-29 18:28:17",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815df903fb026aedf38b",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:33:37",
+      "ultimo_uso": "2025-04-29 18:33:37",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815bf903fb026aedf36a",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:35:09",
+      "ultimo_uso": "2025-04-29 18:35:09",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8165f903fb026aedf3c8",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:35:13",
+      "ultimo_uso": "2025-04-29 18:35:13",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e816af903fb026aedf406",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:35:27",
+      "ultimo_uso": "2025-04-29 18:35:27",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e817bf903fb026aedf4a5",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:36:34",
+      "ultimo_uso": "2025-04-29 18:36:34",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8166f903fb026aedf3d9",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:36:50",
+      "ultimo_uso": "2025-04-29 18:36:50",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815cf903fb026aedf37c",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:42:53",
+      "ultimo_uso": "2025-04-29 18:42:53",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815ff903fb026aedf399",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:44:06",
+      "ultimo_uso": "2025-04-29 18:44:06",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815af903fb026aedf35f",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:45:14",
+      "ultimo_uso": "2025-04-29 18:45:14",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e8165f903fb026aedf3c6",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:47:02",
+      "ultimo_uso": "2025-04-29 18:47:02",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e818bf903fb026aedf53c",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:50:47",
+      "ultimo_uso": "2025-04-29 18:50:47",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e815bf903fb026aedf373",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:54:45",
+      "ultimo_uso": "2025-04-29 18:54:45",
+      "ratio_cache": 0.0
+    },
+    {
+      "id": "680e816ef903fb026aedf41d",
+      "total": 1,
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "primer_uso": "2025-04-29 18:59:10",
+      "ultimo_uso": "2025-04-29 18:59:10",
+      "ratio_cache": 0.0
+    }
+  ],
+  "resumen": {
+    "total_ids_unicos": 116,
+    "promedio_consultas_por_id": 60.37931034482759,
+    "tiempo_ejecucion_minutos": 180,
+    "cache_hit_global": 0.9407481439177613
+  }
+}
