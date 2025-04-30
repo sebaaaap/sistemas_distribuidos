@@ -21,7 +21,7 @@ services:
 
   redis:                                        #LRU y LFU
     image: redis:latest               # descomentar y comentar la otra para cambiar la politica:
-    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru # allkeys-lfu
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru # allkeys-lfu
     ports:
       - "6379:6379"
     volumes:
@@ -35,7 +35,7 @@ services:
       - redis
       - almacenamiento
     environment:
-    - TTL_CACHE=3600
+    - TTL_CACHE=1800
   
     
   almacenamiento:
