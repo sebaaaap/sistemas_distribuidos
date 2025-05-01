@@ -30,7 +30,6 @@
 5. **Importante**
    - Ir a "generador_trafico/app/estadisticas" para ver estadisticas
 
-   - En la rama "scraper_LM" esta la busqueda de eventos a travès de la API
 
 
 ## 🛠️ Para meter mano 
