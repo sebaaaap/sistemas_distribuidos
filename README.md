@@ -27,8 +27,10 @@
    ```bash
    docker compose up --build
    ```
-5. **Ver estadisticas generales y por evento**
-   - anda a "generador_trafico/app/estadisticas"
+5. **Importante**
+   - Ir a "generador_trafico/app/estadisticas" para ver estadisticas
+
+   - En la rama "scraper_LM" esta la busqueda de eventos a travès de la API
 
 
 ## 🛠️ Para meter mano 
