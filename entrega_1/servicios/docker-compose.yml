@@ -21,7 +21,7 @@ services:
 
   redis:                                        #LRU y LFU
     image: redis:latest               # descomentar y comentar la otra para cambiar la politica:
-    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru # allkeys-lfu
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lfu #allkeys-lru  
     ports:
       - "6379:6379"
     volumes:
@@ -68,16 +68,15 @@ services:
       - almacenamiento
       - cache
     
-
   scraper:
-   build:
-    context: ./scraper
-   environment:  
-    - URL_MONGODB=http://almacenamiento:8000/eventos
-    - MAX_EVENTOS=10  # N° de eventos que deseas scrapear
-   depends_on:
-    - almacenamiento
-    
+    build:
+      context: ./scraper
+    environment:
+      - URL_ALMACENAMIENTO=http://almacenamiento:8000/eventos
+    depends_on:
+      - almacenamiento
+
+
 
 
 volumes:
