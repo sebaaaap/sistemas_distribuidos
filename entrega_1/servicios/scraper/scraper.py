@@ -34,9 +34,9 @@ def enviar_evento(evento):
     try:
         response = requests.post(URL_ALMACENAMIENTO, json=evento)
         response.raise_for_status()
-        print(f"✅ Evento {evento.get('uuid')} enviado.")
+        print(f"Evento {evento.get('uuid')} enviado.")
     except Exception as e:
-        print(f"❌ Error al enviar evento {evento.get('uuid')}: {e}")
+        print(f"Error al enviar evento {evento.get('uuid')}: {e}")
 
 def procesar_eventos(data):
     global eventos_acumulados, uuids_vistos
@@ -64,39 +64,39 @@ def main():
                 try:
                     data = response.json()
                     nuevos = procesar_eventos(data)
-                    print(f"📥 Capturados {nuevos} nuevos eventos. Total: {len(eventos_acumulados)}")
+                    print(f"Capturados {nuevos} nuevos eventos. Total: {len(eventos_acumulados)}")
                 except Exception as e:
-                    print(f"❌ Error procesando respuesta: {e}")
+                    print(f"Error procesando respuesta: {e}")
 
         page.on("response", handle_response)
 
-        print("🌐 Abriendo Waze Live Map...")
+        print("Abriendo Waze Live Map...")
         page.goto("https://www.waze.com/es-419/live-map/")
 
         try:
             page.wait_for_selector("//button[contains(text(), 'Entendido')]", timeout=15000)
             page.locator("//button[contains(text(), 'Entendido')]").click()
-            print("✅ Ventana emergente cerrada.")
+            print("Ventana emergente cerrada.")
         except Exception as e:
-            print(f"⚠️ No se detectó ventana emergente: {e}")
+            print(f"No se detectó ventana emergente: {e}")
 
-        # Verificación
-        print("🌍 Página actual:", page.url)
+        
+        print("Página actual:", page.url)
         try:
             title = page.title()
-            print("📄 Título de la página:", title)
+            print("Título de la página:", title)
         except Exception as e:
-            print("⚠️ No se pudo obtener el título:", e)
+            print(" se pudo obtener el título:", e)
 
-        # Screenshot de verificación
+        
         try:
             screenshot_path = "waze_screenshot.png"
             page.screenshot(path=screenshot_path, full_page=True)
-            print(f"📸 Screenshot tomada y guardada como {screenshot_path}")
+            print(f"Screenshot tomada y guardada como {screenshot_path}")
         except Exception as e:
-            print(f"❌ Error al tomar screenshot: {e}")
+            print(f"Error al tomar screenshot: {e}")
 
-        time.sleep(10)  # Dejar cargar bien el mapa
+        time.sleep(10)  
 
         center_x, center_y = 600, 300
 
@@ -112,7 +112,7 @@ def main():
                 if len(eventos_acumulados) >= MAX_EVENTOS:
                     break
 
-                print(f"🖱️ Moviendo mapa hacia {direccion}...")
+                print(f"Moviendo mapa hacia {direccion}...")
                 page.mouse.move(x1, y1)
                 page.mouse.down()
                 page.mouse.move(x2, y2, steps=10)
@@ -123,7 +123,7 @@ def main():
         with open("eventos_acumulados.json", "w", encoding="utf-8") as f:
             json.dump({"alerts": eventos_acumulados}, f, indent=2, ensure_ascii=False)
 
-        print(f"\n✅ Proceso terminado. Se guardaron {len(eventos_acumulados)} eventos.")
+        print(f"\Proceso terminado. Se guardaron {len(eventos_acumulados)} eventos.")
         browser.close()
 
 if __name__ == "__main__":
