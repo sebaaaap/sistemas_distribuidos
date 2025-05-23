@@ -4,13 +4,14 @@ import time
 import os
 import requests
 
-MAX_EVENTOS = 10000
+MAX_EVENTOS = 50000
 INTERVALO_MOVIMIENTO = 5
 PIXEL_MOVIMIENTO = 100
 
 URL_ALMACENAMIENTO = os.getenv("URL_ALMACENAMIENTO", "http://localhost:8000/eventos")
 
-keys_to_remove = [
+# Esta tarea la realizará un nuevo módulo
+"""keys_to_remove = [
     "comments", "reportDescription", "nThumbsUp", "reportBy",
     "reportByMunicipalityUser", "reportRating", "reportMood",
     "fromNodeId", "toNodeId", "magvar", "additionalInfo", "wazeData"
@@ -19,7 +20,7 @@ keys_to_remove = [
 eventos_acumulados = []
 uuids_vistos = set()
 
-def remove_keys_from_dict(data, keys_to_remove):
+ def remove_keys_from_dict(data, keys_to_remove):
     if isinstance(data, list):
         for item in data:
             remove_keys_from_dict(item, keys_to_remove)
@@ -29,6 +30,9 @@ def remove_keys_from_dict(data, keys_to_remove):
         for key in data:
             if isinstance(data[key], (dict, list)):
                 remove_keys_from_dict(data[key], keys_to_remove)
+"""
+
+
 
 def enviar_evento(evento):
     try:
@@ -42,7 +46,7 @@ def procesar_eventos(data):
     global eventos_acumulados, uuids_vistos
 
     alerts = data.get("alerts", [])
-    remove_keys_from_dict(alerts, keys_to_remove)
+    #remove_keys_from_dict(alerts, keys_to_remove)
 
     nuevos = 0
     for evento in alerts:

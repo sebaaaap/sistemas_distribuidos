@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 import os
-import certifi  # Para manejar certificados SSL
+import certifi  
 
 # Configuración con seguridad SSL
 MONGO_URI = os.getenv("MONGO_URI", 
