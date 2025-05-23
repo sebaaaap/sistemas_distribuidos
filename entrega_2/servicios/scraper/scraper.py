@@ -2,37 +2,16 @@ from playwright.sync_api import sync_playwright
 import json
 import time
 import os
+import random
 import requests
 
 MAX_EVENTOS = 50000
-INTERVALO_MOVIMIENTO = 5
 PIXEL_MOVIMIENTO = 100
 
 URL_ALMACENAMIENTO = os.getenv("URL_ALMACENAMIENTO", "http://localhost:8000/eventos")
 
-# Esta tarea la realizará un nuevo módulo
-"""keys_to_remove = [
-    "comments", "reportDescription", "nThumbsUp", "reportBy",
-    "reportByMunicipalityUser", "reportRating", "reportMood",
-    "fromNodeId", "toNodeId", "magvar", "additionalInfo", "wazeData"
-]
-
 eventos_acumulados = []
 uuids_vistos = set()
-
- def remove_keys_from_dict(data, keys_to_remove):
-    if isinstance(data, list):
-        for item in data:
-            remove_keys_from_dict(item, keys_to_remove)
-    elif isinstance(data, dict):
-        for key in keys_to_remove:
-            data.pop(key, None)
-        for key in data:
-            if isinstance(data[key], (dict, list)):
-                remove_keys_from_dict(data[key], keys_to_remove)
-"""
-
-
 
 def enviar_evento(evento):
     try:
@@ -42,11 +21,10 @@ def enviar_evento(evento):
     except Exception as e:
         print(f"Error al enviar evento {evento.get('uuid')}: {e}")
 
-def procesar_eventos(data):
+def procesar_eventos(data):    
     global eventos_acumulados, uuids_vistos
 
     alerts = data.get("alerts", [])
-    #remove_keys_from_dict(alerts, keys_to_remove)
 
     nuevos = 0
     for evento in alerts:
@@ -84,15 +62,13 @@ def main():
         except Exception as e:
             print(f"No se detectó ventana emergente: {e}")
 
-        
         print("Página actual:", page.url)
         try:
             title = page.title()
             print("Título de la página:", title)
         except Exception as e:
-            print(" se pudo obtener el título:", e)
+            print("No se pudo obtener el título:", e)
 
-        
         try:
             screenshot_path = "waze_screenshot.png"
             page.screenshot(path=screenshot_path, full_page=True)
@@ -100,7 +76,7 @@ def main():
         except Exception as e:
             print(f"Error al tomar screenshot: {e}")
 
-        time.sleep(10)  
+        time.sleep(10)
 
         center_x, center_y = 600, 300
 
@@ -122,12 +98,14 @@ def main():
                 page.mouse.move(x2, y2, steps=10)
                 page.mouse.up()
 
-                time.sleep(INTERVALO_MOVIMIENTO)
+                espera = random.uniform(5, 12)
+                print(f"Esperando {espera:.2f} segundos antes del siguiente movimiento...")
+                time.sleep(espera)
 
         with open("eventos_acumulados.json", "w", encoding="utf-8") as f:
             json.dump({"alerts": eventos_acumulados}, f, indent=2, ensure_ascii=False)
 
-        print(f"\Proceso terminado. Se guardaron {len(eventos_acumulados)} eventos.")
+        print(f"Proceso terminado. Se guardaron {len(eventos_acumulados)} eventos.")
         browser.close()
 
 if __name__ == "__main__":
