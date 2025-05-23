@@ -6,7 +6,7 @@ import os
 STORAGE_SERVICE_URL = os.getenv("STORAGE_SERVICE_URL", "http://almacenamiento:8000")
 
 # Obtiene el TTL desde una variable de entorno. Si no está definida, usa 1800 por defecto.
-TTL = int(os.getenv("TTL_CACHE", 1800))
+TTL = int(os.getenv("TTL_CACHE", 3600))
 
 app = FastAPI()
 

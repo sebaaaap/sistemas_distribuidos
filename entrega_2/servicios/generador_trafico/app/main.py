@@ -9,22 +9,23 @@ import os
 import glob
 
 from distribuciones import generar_intervalo  # Importar el generador corregido
-from distribuciones import generar_id_zipf
+#from distribuciones import generar_id_zipf
+
 # Configuración de URLs
 CACHE_URL = os.getenv('CACHE_URL', "http://cache:8001/eventos")
 ALMACENAMIENTO_URL = os.getenv('ALMACENAMIENTO_URL', "http://almacenamiento:8000/eventos/getall_ids")
 
 # Configuración de parámetros
 MIN_IDS = int(os.getenv('MIN_IDS', 1))
-DURACION_DEFAULT = int(os.getenv('DURACION_MINUTOS', 0))
+DURACION_DEFAULT = int(os.getenv('DURACION_MINUTOS', 180))
 
 def limpiar_archivos_anteriores():
     for f in glob.glob('estadisticas_*.json') + glob.glob('metricas_*.json'):
         try:
             os.remove(f)
-            print(f"♻️ Eliminado archivo anterior: {f}")
+            print(f"Eliminado archivo anterior: {f}")
         except Exception as e:
-            print(f"⚠️ No se pudo eliminar {f}: {str(e)}")
+            print(f"No se pudo eliminar {f}: {str(e)}")
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Generador de tráfico para pruebas de cache')
@@ -34,7 +35,7 @@ def parse_args():
     return parser.parse_args()
 
 def esperar_ids_suficientes():
-    print(f"\n🔍 Buscando al menos {MIN_IDS} ID(s)...")
+    print(f"\Buscando al menos {MIN_IDS} ID(s)...")
     while True:
         try:
             response = requests.get(ALMACENAMIENTO_URL, timeout=5)
@@ -139,7 +140,7 @@ def generar_trafico(duracion_minutos=DURACION_DEFAULT):
     print(f"\n Iniciando generador ({duracion_minutos} min) | IDs disponibles: {len(sample_ids)}")
     print(f" Inicio: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     if hora_fin:
-        print(f"⏳ Fin estimado: {hora_fin.strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"git reset --hard origin/mainFin estimado: {hora_fin.strftime('%Y-%m-%d %H:%M:%S')}")
     
     try:
         while not hora_fin or datetime.now() < hora_fin:

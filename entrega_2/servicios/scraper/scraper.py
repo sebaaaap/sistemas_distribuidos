@@ -1,28 +1,23 @@
+from playwright.sync_api import sync_playwright
 import json
 import time
-import requests
-from datetime import datetime
 import os
+import requests
 
-# Configuración
-URL = "https://www.waze.com/live-map/api/georss?top=-33.3&bottom=-33.7&left=-70.95&right=-70.35&env=row&types=alerts,traffic"
-INTERVALO_NORMAL = 15  # segundos entre ciclos
-PAUSA_EXTRA = 10       # pausa cada 100 eventos nuevos
+MAX_EVENTOS = 10000
+INTERVALO_MOVIMIENTO = 5
+PIXEL_MOVIMIENTO = 100
 
-# Configuración de URLs (selección automática según entorno)
-URL_MONGODB = os.getenv('URL_MONGODB', "http://cache:8001/eventos")
-MAX_EVENTOS = int(os.getenv('MAX_EVENTOS', 10))  # ✅ Cambiado de 10 a 10.000
+URL_ALMACENAMIENTO = os.getenv("URL_ALMACENAMIENTO", "http://localhost:8000/eventos")
 
-
-# Claves innecesarias
 keys_to_remove = [
     "comments", "reportDescription", "nThumbsUp", "reportBy",
     "reportByMunicipalityUser", "reportRating", "reportMood",
     "fromNodeId", "toNodeId", "magvar", "additionalInfo", "wazeData"
 ]
 
-# Lista de eventos válidos
-eventos_totales = []
+eventos_acumulados = []
+uuids_vistos = set()
 
 def remove_keys_from_dict(data, keys_to_remove):
     if isinstance(data, list):
@@ -30,98 +25,106 @@ def remove_keys_from_dict(data, keys_to_remove):
             remove_keys_from_dict(item, keys_to_remove)
     elif isinstance(data, dict):
         for key in keys_to_remove:
-            if key in data:
-                del data[key]
+            data.pop(key, None)
         for key in data:
             if isinstance(data[key], (dict, list)):
                 remove_keys_from_dict(data[key], keys_to_remove)
 
-def esta_en_region_metropolitana(location):
-    if not location:
-        return False
-    lat = location.get("y")
-    lon = location.get("x")
-    return (
-        lat is not None and lon is not None and
-        -33.75 <= lat <= -33.2 and
-        -70.95 <= lon <= -70.35
-    )
-
-def scrape_waze_data(url):
+def enviar_evento(evento):
     try:
-        response = requests.get(url)
+        response = requests.post(URL_ALMACENAMIENTO, json=evento)
         response.raise_for_status()
-        data = response.json()
-        remove_keys_from_dict(data, keys_to_remove)
-        return data
+        print(f"Evento {evento.get('uuid')} enviado.")
     except Exception as e:
-        print(f"❌ Error al obtener datos: {e}")
-        return {}
+        print(f"Error al enviar evento {evento.get('uuid')}: {e}")
 
-def preparar_evento(evento_waze):
-    campos_permitidos = {
-        "id", "uuid", "country", "city", "street", "location",
-        "type", "subtype", "speed", "roadType", "inscale",
-        "confidence", "reliability", "pubMillis"
-    }
-    return {k: v for k, v in evento_waze.items() if k in campos_permitidos}
+def procesar_eventos(data):
+    global eventos_acumulados, uuids_vistos
 
-def enviar_a_mongodb(evento_waze):
-    try:
-        evento_limpio = preparar_evento(evento_waze)
-        response = requests.post(
-            URL_MONGODB,
-            json=evento_limpio,
-            headers={"Content-Type": "application/json"}
-        )
-        response.raise_for_status()
-        print(f"✅ Evento {evento_waze.get('uuid')} enviado correctamente")
-    except Exception as e:
-        print(f"❌ Error al enviar evento: {e}")
+    alerts = data.get("alerts", [])
+    remove_keys_from_dict(alerts, keys_to_remove)
+
+    nuevos = 0
+    for evento in alerts:
+        uuid = evento.get("uuid")
+        if uuid and uuid not in uuids_vistos:
+            eventos_acumulados.append(evento)
+            uuids_vistos.add(uuid)
+            nuevos += 1
+            enviar_evento(evento)
+    return nuevos
 
 def main():
-    print(f"[{datetime.now()}] Iniciando scraper para la Región Metropolitana...")
-    seen_ids = set()
-    acumulador_nuevos = 0
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
 
-    while len(eventos_totales) < MAX_EVENTOS:
-        data = scrape_waze_data(URL)
-        nuevos = 0
+        def handle_response(response):
+            if "georss" in response.url and response.status == 200:
+                try:
+                    data = response.json()
+                    nuevos = procesar_eventos(data)
+                    print(f"Capturados {nuevos} nuevos eventos. Total: {len(eventos_acumulados)}")
+                except Exception as e:
+                    print(f"Error procesando respuesta: {e}")
 
-        for item in data.get("alerts", []) + data.get("jams", []):
-            uid = item.get("uuid")
-            location = item.get("location")
-            if uid and uid not in seen_ids and esta_en_region_metropolitana(location):
-                eventos_totales.append(item)
-                seen_ids.add(uid)
-                nuevos += 1
-                acumulador_nuevos += 1
+        page.on("response", handle_response)
 
-                # Enviar cada evento a MongoDB
-                enviar_a_mongodb(item)
+        print("Abriendo Waze Live Map...")
+        page.goto("https://www.waze.com/es-419/live-map/")
 
-                if len(eventos_totales) >= MAX_EVENTOS:
+        try:
+            page.wait_for_selector("//button[contains(text(), 'Entendido')]", timeout=15000)
+            page.locator("//button[contains(text(), 'Entendido')]").click()
+            print("Ventana emergente cerrada.")
+        except Exception as e:
+            print(f"No se detectó ventana emergente: {e}")
+
+        
+        print("Página actual:", page.url)
+        try:
+            title = page.title()
+            print("Título de la página:", title)
+        except Exception as e:
+            print(" se pudo obtener el título:", e)
+
+        
+        try:
+            screenshot_path = "waze_screenshot.png"
+            page.screenshot(path=screenshot_path, full_page=True)
+            print(f"Screenshot tomada y guardada como {screenshot_path}")
+        except Exception as e:
+            print(f"Error al tomar screenshot: {e}")
+
+        time.sleep(10)  
+
+        center_x, center_y = 600, 300
+
+        while len(eventos_acumulados) < MAX_EVENTOS:
+            movimientos = [
+                ("derecha", center_x, center_y, center_x - PIXEL_MOVIMIENTO, center_y),
+                ("abajo", center_x, center_y, center_x, center_y + PIXEL_MOVIMIENTO),
+                ("izquierda", center_x, center_y, center_x + PIXEL_MOVIMIENTO, center_y),
+                ("arriba", center_x, center_y, center_x, center_y - PIXEL_MOVIMIENTO),
+            ]
+
+            for direccion, x1, y1, x2, y2 in movimientos:
+                if len(eventos_acumulados) >= MAX_EVENTOS:
                     break
 
-        print(f"🔄 Ciclo: {len(eventos_totales)} eventos totales (nuevos en este ciclo: {nuevos})")
+                print(f"Moviendo mapa hacia {direccion}...")
+                page.mouse.move(x1, y1)
+                page.mouse.down()
+                page.mouse.move(x2, y2, steps=10)
+                page.mouse.up()
 
-        if len(eventos_totales) >= MAX_EVENTOS:
-            break
+                time.sleep(INTERVALO_MOVIMIENTO)
 
-        # Pausa condicional
-        if acumulador_nuevos >= 100:
-            print(f"⏸ Pausa adicional de {PAUSA_EXTRA} segundos (cada 100 nuevos eventos)...")
-            time.sleep(PAUSA_EXTRA)
-            acumulador_nuevos = 0
-        else:
-            time.sleep(INTERVALO_NORMAL)
+        with open("eventos_acumulados.json", "w", encoding="utf-8") as f:
+            json.dump({"alerts": eventos_acumulados}, f, indent=2, ensure_ascii=False)
 
-    # Guardar en archivo JSON (opcional, como backup)
-    with open("eventos.json", "w", encoding="utf-8") as f:
-        json.dump(eventos_totales, f, indent=2, ensure_ascii=False)
-
-    print(f"\n✅ Finalizado. {len(eventos_totales)} eventos procesados.")
-
+        print(f"\Proceso terminado. Se guardaron {len(eventos_acumulados)} eventos.")
+        browser.close()
 
 if __name__ == "__main__":
     main()
