@@ -17,18 +17,19 @@
     ```
 3. **Crear .env y colocar sus credenciales**
    ```python
-   MONGO_USER=user
-   MONGO_PASSWORD=password 
-   MONGO_CLUSTER=cluster1
-   MONGO_DB=db       
-   MONGO_COLLECTION=collection
+   MONGO_USER=
+   MONGO_PASSWORD= 
+   MONGO_CLUSTER=
+   MONGO_DB=       
+   MONGO_COLLECTION=
    ```
 4. **Levantar servicios**
    ```bash
    docker compose up --build
    ```
-5. **Ver estadisticas generales y por evento**
-   - anda a "generador_trafico/app/estadisticas"
+5. **Importante**
+   - Ir a "generador_trafico/app/estadisticas" para ver estadisticas
+
 
 
 ## 🛠️ Para meter mano 
