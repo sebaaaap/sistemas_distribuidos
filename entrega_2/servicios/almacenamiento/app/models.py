@@ -10,11 +10,11 @@ class EventoReal(BaseModel):
     id: str
     uuid: str
     country: str
-    city: Optional[str] = None  # Ahora es opcional
+    city: Optional[str] = None 
     street: str
-    location: dict  # O usa el modelo Ubicacion si prefieres
+    location: dict  
     type: str  # Permite cualquier tipo (POLICE, HAZARD, etc.)
-    subtype: Optional[str] = None  # Ahora es opcional
+    subtype: Optional[str] = None  
     speed: int
     roadType: int  # Acepta cualquier número (1, 2, 3, etc.)
     inscale: bool  # Permite True/False sin restricción

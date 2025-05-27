@@ -2,42 +2,6 @@ version: '3.8'
 
 services:
 
-  # se comento esto ya que incorporamos mongobdAtlas
-  # mongodb:
-  #   image: mongo:latest
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongodb_data:/data/db
-  
-  # almacenamiento:
-  #   build: ./almacenamiento
-  #   volumes:
-  #     - ./almacenamiento/app:/app
-  #   ports:
-  #     - "8000:8000"
-  #   depends_on:
-  #     - mongodb
-
-  redis:                                        #LRU y LFU
-    image: redis:latest               # descomentar y comentar la otra para cambiar la politica:
-    command: redis-server --maxmemory 10gb --maxmemory-policy allkeys-lru # allkeys-lfu
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-  cache:
-    build: ./cache
-    ports:
-      - "8001:8001"
-    depends_on:
-      - redis
-      - almacenamiento
-    environment:
-    - TTL_CACHE=86400
-  
-    
   almacenamiento:
     build: ./almacenamiento
     ports:
@@ -49,25 +13,7 @@ services:
       - MONGO_CLUSTER=${MONGO_CLUSTER}
       - MONGO_DB=${MONGO_DB}
       - MONGO_COLLECTION=${MONGO_COLLECTION}
-    
-  
-  generador:
-    build:
-      context: ./generador_trafico
-    environment:
-      - PYTHONUNBUFFERED=1
-      - MIN_IDS=60000
-      - CACHE_URL=http://cache:8001/eventos
-      - ALMACENAMIENTO_URL=http://almacenamiento:8000/eventos/getall_ids
-    volumes:
-      - ./generador_trafico/app:/app  # Mapeo consistente
-    # comando para ejecutar el generador, ajustar valor a gusto, brr
-    command: >
-      sh -c "python main.py --duracion 2" 
-    depends_on:
-      - almacenamiento
-      - cache
-    
+
   scraper:
     build:
       context: ./scraper
@@ -76,9 +22,23 @@ services:
     depends_on:
       - almacenamiento
 
+  filtrador:
+    build: ./filtrador
+    depends_on:
+      - almacenamiento
+    env_file:
+      - .env
+    volumes:
+      - ./filtrador/outputs:/app/outputs
+    command: python filtrador.py
 
 
+  procesador:
+    image: bde2020/pig
+    volumes:
+      - ./procesador:/data
+    command: pig /data/analisis.pig
+    depends_on:
+      - filtrador
 
-volumes:
-  # mongodb_data:
-  redis_data:
+volumes: {}
