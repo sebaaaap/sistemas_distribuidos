@@ -20,6 +20,7 @@ def enviar_evento(evento):
         print(f"Evento {evento.get('uuid')} enviado.")
     except Exception as e:
         print(f"Error al enviar evento {evento.get('uuid')}: {e}")
+        print(evento)
 
 def procesar_eventos(data):    
     global eventos_acumulados, uuids_vistos
