@@ -3,6 +3,7 @@ from app.database import events_collection
 from app.models import EventoReal
 from bson import ObjectId
 from datetime import datetime
+from typing import List, Dict, Any
 
 app = FastAPI()
 
@@ -51,7 +52,23 @@ async def leer_evento(evento_id: str):
         pass  
     raise HTTPException(status_code=404, detail="Evento no encontrado")
 
+@app.get("/eventos/getall_bruto", response_model=List[Dict[str, Any]])
+async def get_all_bruto_events():
+    try:
+        # 1. Obtener TODOS los eventos de la colección (sin filtros)
+        eventos = list(events_collection.find({}))
+        
+        if not eventos:
+            raise HTTPException(status_code=404, detail="No hay eventos en la base de datos")
 
+        # 2. Convertir ObjectId a string para cada evento
+        for evento in eventos:
+            evento["_id"] = str(evento["_id"])
+
+        return eventos
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
 
 
 
