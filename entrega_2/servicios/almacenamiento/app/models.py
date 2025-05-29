@@ -1,93 +1,170 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from typing import Optional, Literal
 from datetime import datetime
+from enum import Enum
+
+class TipoEvento(str, Enum):
+    ACCIDENTE = "accidente"
+    CONGESTION = "congestion"
+    PELIGRO = "peligro"
+    OBRAS = "obras"
+    POLICIA = "policia"
+    CIERRE = "cierre"
+    OTRO = "otro"
+
+class Gravedad(str, Enum):
+    BAJA = "baja"
+    MEDIA = "media"
+    ALTA = "alta"
 
 class Ubicacion(BaseModel):
+    """Modelo para coordenadas geográficas estandarizadas"""
     longitud: float = Field(..., alias="x")
     latitud: float = Field(..., alias="y")
 
 class EventoWazeRaw(BaseModel):
-    """Modelo para los datos crudos de Waze"""
-    id: str
+    """
+    Modelo para validar la estructura de datos crudos de Waze antes de procesarlos.
+    Todos los campos son opcionales excepto los esenciales para la estandarización.
+    """
     uuid: str
-    country: str
-    city: Optional[str] = None
-    street: str
-    location: dict
     type: str
     subtype: Optional[str] = None
-    speed: int
-    roadType: int
-    inscale: bool
-    confidence: int
-    reliability: int
+    city: Optional[str] = None
+    street: Optional[str] = "Desconocido"
+    location: dict
     pubMillis: int
+    confidence: Optional[int] = 1
+    reliability: Optional[int] = 1
+    nThumbsUp: Optional[int] = 0
+    nComments: Optional[int] = 0
+    
+    # Campos adicionales de Waze (opcionales)
+    country: Optional[str] = None
+    speed: Optional[int] = None
+    roadType: Optional[int] = None
+    inscale: Optional[bool] = None
     nearBy: Optional[str] = None
     provider: Optional[str] = None
     providerId: Optional[str] = None
-    nComments: Optional[int] = None
-    nThumbsUp: Optional[int] = None
+
+    @validator('location')
+    def validate_location(cls, value):
+        """Valida que location tenga las coordenadas x e y"""
+        if 'x' not in value or 'y' not in value:
+            raise ValueError("Location debe contener x e y")
+        return value
 
     @property
-    def event_date(self) -> datetime:
+    def fecha_evento(self) -> datetime:
+        """Convierte milisegundos a datetime"""
         return datetime.fromtimestamp(self.pubMillis / 1000)
 
 class EventoEstandar(BaseModel):
-    """Modelo para los datos estandarizados"""
-    id_evento: str
-    tipo: Literal["accidente", "congestion", "peligro", "obras", "policia", "cierre", "otro"]
-    subtipo: Optional[str]
-    comuna: str
-    calle: str
-    ubicacion: Ubicacion
-    fecha: datetime
-    gravedad: Literal["baja", "media", "alta"]
-    confirmaciones: int = 0
-    comentarios: int = 0
-    fuente: Literal["waze"] = "waze"
-    raw_data: dict  # Conservamos los datos originales
+    """
+    Modelo para datos estandarizados que se almacenarán en MongoDB.
+    Todos los campos son requeridos excepto donde se indique.
+    """
+    id_evento: str = Field(..., description="UUID del evento de Waze")
+    tipo: TipoEvento = Field(..., description="Tipo estandarizado del evento")
+    subtipo: Optional[str] = Field(None, description="Subtipo original de Waze")
+    comuna: str = Field(..., description="Nombre de la comuna estandarizado")
+    calle: str = Field(..., description="Nombre de la calle")
+    ubicacion: Ubicacion = Field(..., description="Coordenadas estandarizadas")
+    fecha: datetime = Field(..., description="Fecha del evento")
+    gravedad: Gravedad = Field(..., description="Nivel de gravedad calculado")
+    confirmaciones: int = Field(0, description="Número de confirmaciones (nThumbsUp)")
+    comentarios: int = Field(0, description="Número de comentarios (nComments)")
+    raw_data: dict = Field(..., description="Datos crudos originales de Waze")
 
     @classmethod
-    def from_waze_event(cls, waze_event: EventoWazeRaw):
-        # Mapeo de tipos Waze a nuestros tipos estandarizados
-        tipo_map = {
-            "ACCIDENT": "accidente",
-            "JAM": "congestion",
-            "ROAD_CLOSED": "cierre",
-            "POLICE": "policia",
-            "HAZARD": {
-                "HAZARD_ON_ROAD_POT_HOLE": "obras",
-                "HAZARD_ON_ROAD_LANE_CLOSED": "obras",
-                "HAZARD_ON_ROAD_CONSTRUCTION": "obras",
-                "HAZARD_ON_ROAD_OBJECT": "peligro"
-            }
-        }
+    def from_waze_event(cls, data: dict):
+        """
+        Transforma un evento crudo de Waze al formato estandarizado.
         
-        waze_type = waze_event.type
-        waze_subtype = waze_event.subtype or ""
+        Args:
+            data: Diccionario con datos crudos de Waze
+            
+        Returns:
+            EventoEstandar: Evento procesado y validado
+        """
+        # Validar primero los datos crudos
+        waze_event = EventoWazeRaw(**data)
         
-        if waze_type in tipo_map:
-            if isinstance(tipo_map[waze_type], dict):
-                tipo = tipo_map[waze_type].get(waze_subtype, "peligro")
-            else:
-                tipo = tipo_map[waze_type]
-        else:
-            tipo = "otro"
-
+        # Determinar el tipo estandarizado
+        tipo = cls._determinar_tipo(waze_event.type, waze_event.subtype)
+        
         # Calcular gravedad
-        score = waze_event.confidence * waze_event.reliability
-        gravedad = "alta" if score > 60 else "media" if score > 30 else "baja"
-
+        gravedad = cls._calcular_gravedad(waze_event.confidence, waze_event.reliability)
+        
+        # Normalizar nombre de comuna
+        comuna = cls._normalizar_comuna(waze_event.city)
+        
         return cls(
             id_evento=waze_event.uuid,
             tipo=tipo,
-            subtipo=waze_subtype if waze_subtype else None,
-            comuna=waze_event.city.strip().title() if waze_event.city else "Desconocido",
+            subtipo=waze_event.subtype,
+            comuna=comuna,
             calle=waze_event.street,
             ubicacion=Ubicacion(**waze_event.location),
-            fecha=waze_event.event_date,
+            fecha=waze_event.fecha_evento,
             gravedad=gravedad,
-            confirmaciones=waze_event.nThumbsUp or 0,
-            comentarios=waze_event.nComments or 0,
-            raw_data=waze_event.dict()
+            confirmaciones=waze_event.nThumbsUp,
+            comentarios=waze_event.nComments,
+            raw_data=data  # Conservamos todos los datos originales
         )
+
+    @staticmethod
+    def _determinar_tipo(tipo_waze: str, subtipo_waze: Optional[str]) -> TipoEvento:
+        """Mapea los tipos de Waze a nuestros tipos estandarizados"""
+        tipo_waze = tipo_waze.upper() if tipo_waze else ""
+        subtipo_waze = subtipo_waze.upper() if subtipo_waze else ""
+        
+        mapeo = {
+            "ACCIDENT": TipoEvento.ACCIDENTE,
+            "JAM": TipoEvento.CONGESTION,
+            "ROAD_CLOSED": TipoEvento.CIERRE,
+            "POLICE": TipoEvento.POLICIA,
+            "HAZARD": {
+                "HAZARD_ON_ROAD_POT_HOLE": TipoEvento.OBRAS,
+                "HAZARD_ON_ROAD_LANE_CLOSED": TipoEvento.OBRAS,
+                "HAZARD_ON_ROAD_CONSTRUCTION": TipoEvento.OBRAS,
+                "HAZARD_ON_ROAD_OBJECT": TipoEvento.PELIGRO,
+                "HAZARD_ON_SHOULDER_CAR_STOPPED": TipoEvento.PELIGRO,
+                "HAZARD_ON_ROAD_TRAFFIC_LIGHT_FAULT": TipoEvento.PELIGRO
+            }
+        }
+        
+        if tipo_waze in mapeo:
+            if isinstance(mapeo[tipo_waze], dict):
+                return mapeo[tipo_waze].get(subtipo_waze, TipoEvento.PELIGRO)
+            return mapeo[tipo_waze]
+        return TipoEvento.OTRO
+
+    @staticmethod
+    def _calcular_gravedad(confianza: int, fiabilidad: int) -> Gravedad:
+        """Determina la gravedad basada en confianza y fiabilidad"""
+        score = confianza * fiabilidad
+        if score > 60:
+            return Gravedad.ALTA
+        if score > 30:
+            return Gravedad.MEDIA
+        return Gravedad.BAJA
+
+    @staticmethod
+    def _normalizar_comuna(nombre_comuna: Optional[str]) -> str:
+        """Estandariza el nombre de la comuna"""
+        if not nombre_comuna or nombre_comuna.strip() == "":
+            return "Desconocido"
+        
+        nombre = nombre_comuna.strip().title()
+        
+        # Correcciones específicas para nombres de comunas
+        correcciones = {
+            "Santiago Centro": "Santiago",
+            "Providencia": "Providencia",
+            "Las Condes": "Las Condes",
+            "Nuñoa": "Ñuñoa"
+        }
+        
+        return correcciones.get(nombre, nombre)

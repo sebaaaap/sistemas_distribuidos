@@ -1,74 +1,119 @@
-from fastapi import FastAPI, HTTPException
-from app.database import events_collection
-from app.models import EventoReal
-from bson import ObjectId
+from fastapi import FastAPI, HTTPException, Query
+from app.database import legacy_data, events_standardized
+from app.models import EventoEstandar, EventoWazeRaw
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Optional, Dict, Any
+import logging
 
 app = FastAPI()
-
-#prueba xdddd
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @app.post("/eventos")
-async def crear_evento(evento: EventoReal):
-    # Convertimos a dict y añadimos fecha de creación
-    evento_data = evento.dict()
-    evento_data["created_at"] = datetime.utcnow()
-    
-    result = events_collection.insert_one(evento_data)
-    return {"id": str(result.inserted_id)}
-
-@app.get("/")
-async def crear_evento():
-    return { "messagge": "ola sebita "}
-
-@app.get("/eventos/getall_ids")
-async def get_all():
+async def crear_evento(evento: Dict[str, Any]):
+    """
+    Endpoint para nuevos eventos. Estandariza y guarda DIRECTAMENTE en eventos_estandarizados.
+    """
     try:
-        # Obtener todos los documentos y extraer solo el campo "_id"
-        eventos = events_collection.find({}, {"_id": 1}) # Proyección: solo el _id)
+        # Validar y estandarizar
+        evento_estandar = EventoEstandar.from_waze_event(evento)
         
-        # Convertir los ObjectId a strings (MongoDB devuelve ObjectId por defecto)
-        eventos_ids = [str(evento["_id"]) for evento in eventos]
+        # Guardar solo en la colección estandarizada
+        result = events_standardized.replace_one(
+            {"id_evento": evento_estandar.id_evento},
+            evento_estandar.dict(),
+            upsert=True
+        )
         
-        return { "ids" : eventos_ids}
-        print(eventos)
-        # return {"lista": eventos}
-    
+        return {
+            "status": "success",
+            "id": evento_estandar.id_evento,
+            "action": "inserted" if result.upserted_id else "updated"
+        }
+        
     except Exception as e:
-        print(f"Error: {e}")  # Para debug
-        raise HTTPException(status_code=500, detail=f"Error al obtener eventos: {str(e)}")
-        
+        logger.error(f"Error: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
 
-@app.get("/eventos/{evento_id}")
-async def leer_evento(evento_id: str):
+@app.post("/migrar")
+async def migrar_legacy_data():
+    """
+    Migra UNA SOLA VEZ los datos de intento_1 a eventos_estandarizados.
+    """
     try:
-        obj_id = ObjectId(evento_id)
-        evento = events_collection.find_one({"_id": obj_id})
-        if evento:
-            evento["_id"] = str(evento["_id"])  # Convertir ObjectId a string
-            return evento
-    except:
-        pass  
-    raise HTTPException(status_code=404, detail="Evento no encontrado")
-
-@app.get("/eventos/getall_bruto", response_model=List[Dict[str, Any]])
-async def get_all_bruto_events():
-    try:
-        # 1. Obtener TODOS los eventos de la colección (sin filtros)
-        eventos = list(events_collection.find({}))
+        total = legacy_data.count_documents({})
+        if total == 0:
+            return {"status": "skip", "message": "No hay datos para migrar"}
         
-        if not eventos:
-            raise HTTPException(status_code=404, detail="No hay eventos en la base de datos")
-
-        # 2. Convertir ObjectId a string para cada evento
-        for evento in eventos:
-            evento["_id"] = str(evento["_id"])
-
-        return eventos
-
+        logger.info(f"Iniciando migración de {total} registros...")
+        migrados = 0
+        
+        for doc in legacy_data.find({}):
+            try:
+                evento = EventoEstandar.from_waze_event(doc)
+                events_standardized.replace_one(
+                    {"id_evento": evento.id_evento},
+                    evento.dict(),
+                    upsert=True
+                )
+                migrados += 1
+            except Exception as e:
+                logger.warning(f"Error en documento {doc.get('_id')}: {str(e)}")
+        
+        return {
+            "status": "completed",
+            "total": total,
+            "migrados": migrados,
+            "errores": total - migrados
+        }
+        
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
+        logger.error(f"Error en migración: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/eventos")
+async def obtener_eventos(
+    comuna: Optional[str] = None,
+    tipo: Optional[str] = None,
+    fecha_desde: Optional[datetime] = None,
+    fecha_hasta: Optional[datetime] = None,
+    limit: int = 100
+):
+    """
+    Consulta eventos estandarizados con filtros.
+    """
+    try:
+        query = {}
+        if comuna:
+            query["comuna"] = comuna.title()
+        if tipo:
+            query["tipo"] = tipo.lower()
+        if fecha_desde or fecha_hasta:
+            query["fecha"] = {}
+            if fecha_desde:
+                query["fecha"]["$gte"] = fecha_desde
+            if fecha_hasta:
+                query["fecha"]["$lte"] = fecha_hasta
+        
+        eventos = list(events_standardized.find(query).limit(limit))
+        for ev in eventos:
+            ev["_id"] = str(ev["_id"])
+        
+        return {
+            "count": len(eventos),
+            "results": eventos
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-
+@app.delete("/legacy")
+async def eliminar_legacy_data():
+    """
+    Elimina los datos legacy (ejecutar solo después de migrar).
+    """
+    try:
+        result = legacy_data.drop()
+        return {"status": "success", "message": "Colección 'intento_1' eliminada"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
