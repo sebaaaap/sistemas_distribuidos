@@ -37,19 +37,18 @@ async def crear_evento(evento: Dict[str, Any]):
 
 @app.post("/migrar")
 async def migrar_legacy_data():
-    """
-    Migra UNA SOLA VEZ los datos de intento_1 a eventos_estandarizados.
-    """
     try:
         total = legacy_data.count_documents({})
-        if total == 0:
-            return {"status": "skip", "message": "No hay datos para migrar"}
-        
         logger.info(f"Iniciando migración de {total} registros...")
         migrados = 0
-        
-        for doc in legacy_data.find({}):
+        errores = 0
+
+        for doc in legacy_data.find({}).batch_size(100):  # Procesar en lotes
             try:
+                # Manejar campos nulos explícitamente
+                doc.setdefault('nComments', 0)
+                doc.setdefault('nThumbsUp', 0)
+                
                 evento = EventoEstandar.from_waze_event(doc)
                 events_standardized.replace_one(
                     {"id_evento": evento.id_evento},
@@ -58,19 +57,23 @@ async def migrar_legacy_data():
                 )
                 migrados += 1
             except Exception as e:
+                errores += 1
                 logger.warning(f"Error en documento {doc.get('_id')}: {str(e)}")
-        
+                continue
+
+            if (migrados + errores) % 100 == 0:
+                logger.info(f"Progreso: {migrados + errores}/{total}")
+
         return {
             "status": "completed",
             "total": total,
             "migrados": migrados,
-            "errores": total - migrados
+            "errores": errores
         }
-        
     except Exception as e:
         logger.error(f"Error en migración: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
-
+    
 @app.get("/eventos")
 async def obtener_eventos(
     comuna: Optional[str] = None,

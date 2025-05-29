@@ -76,6 +76,12 @@ class EventoEstandar(BaseModel):
     confirmaciones: int = Field(0, description="Número de confirmaciones (nThumbsUp)")
     comentarios: int = Field(0, description="Número de comentarios (nComments)")
     raw_data: dict = Field(..., description="Datos crudos originales de Waze")
+    comentarios: int = Field(default=0, description="Número de comentarios (nComments)")
+
+    @validator('comentarios', pre=True)
+    def handle_none_comments(cls, value):
+        """Convierte None a 0 para el campo comentarios"""
+        return value if value is not None else 0
 
     @classmethod
     def from_waze_event(cls, data: dict):
