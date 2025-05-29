@@ -38,7 +38,7 @@ def estandarizar_evento(ev):
 
         return [uuid, tipo, comuna, timestamp, descripcion]
     except Exception as e:
-        print("⚠️ Error estandarizando evento:", e)
+        print("Error estandarizando evento:", e)
         return None
 
 total = collection.count_documents({})
