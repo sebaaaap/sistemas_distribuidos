@@ -2,25 +2,6 @@ version: '3.8'
 
 services:
 
-  redis:                                        #LRU y LFU
-    image: redis:latest               # descomentar y comentar la otra para cambiar la politica:
-    command: redis-server --maxmemory 10gb --maxmemory-policy allkeys-lru # allkeys-lfu
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-  cache:
-    build: ./cache
-    ports:
-      - "8001:8001"
-    depends_on:
-      - redis
-      - almacenamiento
-    environment:
-    - TTL_CACHE=86400
-  
-
   almacenamiento:
     build: ./almacenamiento
     ports:
@@ -47,19 +28,20 @@ services:
       - almacenamiento
     env_file:
       - .env
+    command: python filtrador.py
     volumes:
       - ./filtrador/outputs:/app/outputs
-    command: python filtrador.py
-
 
   procesador:
-    image: bde2020/pig
-    volumes:
-      - ./procesador:/data
-    command: pig /data/analisis.pig
+    image: suhothayan/hadoop-spark-pig-hive:2.9.2
+    container_name: pigprocessor
     depends_on:
       - filtrador
-
-volumes:
-  # mongodb_data:
-  redis_data:
+    volumes:
+      - ./filtrador/outputs:/root/dataset
+      - ./procesador:/root/scripts
+    command: tail -f /dev/null
+    ports:
+      - "50070:50070"
+      - "8088:8088"
+      - "8080:8080"
