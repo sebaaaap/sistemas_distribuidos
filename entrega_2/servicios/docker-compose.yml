@@ -40,6 +40,7 @@ services:
     volumes:
       - ./filtrador/outputs:/root/dataset
       - ./procesador:/root/scripts
+      - ./resultados_pig:/root/results #para guardar resultados de pig
     command: tail -f /dev/null
     ports:
       - "50070:50070"
