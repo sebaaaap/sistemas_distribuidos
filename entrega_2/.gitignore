@@ -18,6 +18,7 @@ pyvenv.cfg
 *estadisticas/
 # Archivos de configuración personales
 *.env
+*resultados_pig/
 
 # Archivos de logs o temporales
 *.log

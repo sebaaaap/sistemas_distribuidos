@@ -1,8 +1,55 @@
 version: '3.8'
 
 services:
+
+  almacenamiento:
+    build: ./almacenamiento
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_CLUSTER}/${MONGO_DB}?retryWrites=true&w=majority&tls=true&authSource=admin
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_CLUSTER=${MONGO_CLUSTER}
+      - MONGO_DB=${MONGO_DB}
+      - MONGO_COLLECTION=${MONGO_COLLECTION}
+
+  scraper:
+    build:
+      context: ./scraper
+    environment:
+      - URL_ALMACENAMIENTO=http://almacenamiento:8000/eventos
+    depends_on:
+      - almacenamiento
+
+  filtrador:
+    build: ./filtrador
+    depends_on:
+      - almacenamiento
+    env_file:
+      - .env
+    command: python filtrador.py
+    environment:
+      - MONGO_URI=mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_CLUSTER}/${MONGO_DB}?retryWrites=true&w=majority&tls=true&authSource=admin
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_CLUSTER=${MONGO_CLUSTER}
+      - MONGO_DB=${MONGO_DB}
+      - MONGO_COLLECTION=${MONGO_COLLECTION}
+    volumes:
+      - ./filtrador/outputs:/app/outputs
+
+  
+
   procesador:
     image: fluddeni/hadoop-pig
     container_name: procesador
     tty: true
     stdin_open: true
+    depends_on:
+      - filtrador
+    volumes:
+      - ./filtrador/outputs:/root/dataset
+      - ./procesador:/root/scripts
+      - ./resultados_pig:/root/results
+    
