@@ -35,14 +35,23 @@ services:
   procesador:
     image: suhothayan/hadoop-spark-pig-hive:2.9.2
     container_name: pigprocessor
-    depends_on:
-      - filtrador
+    user: root
     volumes:
       - ./filtrador/outputs:/root/dataset
       - ./procesador:/root/scripts
-      - ./resultados_pig:/root/results #para guardar resultados de pig
-    command: tail -f /dev/null
-    ports:
+      - ./resultados_pig:/root/results
+    command: sh -c "
+      mkdir -p /usr/local/spark/conf/ &&
+      touch /usr/local/spark/conf/spark-env.sh &&
+      chmod -R 777 /usr/local/spark/conf/ &&
+      service ssh start &&
+      sleep 10 &&
+      /usr/local/hadoop/bin/hdfs dfsadmin -safemode wait &&
+      echo 'Sistema listo. Ejecuta manualmente:' &&
+      echo '1. hdfs dfs -put /root/dataset/eventos_filtrados.csv /user/hadoop/' &&
+      echo '2. pig -x mapreduce -f /root/scripts/trafico_analisis.pig' &&
+      tail -f /dev/null"
+    ports: 
       - "50070:50070"
       - "8088:8088"
       - "8080:8080"
