@@ -2,7 +2,6 @@
 
 
 ## 📋 Requisitos
-- Python 3.8+
 - Docker
 - Solicitar crendenciales 🥵
 
@@ -15,7 +14,7 @@
     ```bash
     cd sistemas_distribuidos/entrega_1/servicios
     ```
-3. **Crear .env y colocar sus credenciales**
+3. **Y crear .env y colocar sus credenciales**
    ```python
    MONGO_USER=
    MONGO_PASSWORD= 
@@ -30,7 +29,7 @@
 
 
 
-## 🛠️ Para correr el pig
+## 🛠️ Para ejecutar scripts del pig
 
 1. **Abrir una nueva terminal y ingresar al contenedor "procesador"**:
 ```bash
@@ -78,7 +77,7 @@ hdfs dfs -copyToLocal /user/hadoop/results/tiempo/part-r-00000 /root/results/tie
 (echo "fecha,total" && cat /root/results/tiempo/part-r-00000) > /root/results/tiempo/tiempo.csv
 ```
 9. **Importante** 
-   - Ir a "servicios/analisis..." para ver los resultados de los pasos que se acaban de realizar
+   - Ir a "servicios/resultados_pig..." para ver los resultados de los pasos que se acaban de realizar
 
 
 
