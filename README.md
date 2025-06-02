@@ -12,7 +12,7 @@
    ```
 2. **Importante estar en el directororio del compose.yml**:
     ```bash
-    cd sistemas_distribuidos/entrega_1/servicios
+    cd sistemas_distribuidos/entrega_2/servicios
     ```
 3. **Y crear .env y colocar sus credenciales**
    ```python
