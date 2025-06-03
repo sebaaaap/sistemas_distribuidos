@@ -22,7 +22,6 @@ os.makedirs("outputs", exist_ok=True)
 
 def limpiar_comas(texto):
     if texto:
-        # Reemplaza las comas por punto y coma para evitar problemas en CSV
         return texto.replace(",", ";")
     return texto
 
@@ -31,7 +30,7 @@ def estandarizar_evento(ev):
         uuid = (ev.get("uuid") or "").strip()
         tipo = (ev.get("type") or "").lower().strip()
         comuna = (ev.get("city") or "desconocida").strip()
-        comuna = limpiar_comas(comuna)  # <-- reemplazo aquí
+        comuna = limpiar_comas(comuna)  
         timestamp = ev.get("pubMillis")
         if timestamp:
             timestamp = datetime.fromtimestamp(timestamp / 1000).isoformat()
@@ -39,7 +38,7 @@ def estandarizar_evento(ev):
             timestamp = ""
 
         descripcion = (ev.get("subtype") or "").strip()
-        descripcion = limpiar_comas(descripcion)  # si quieres, también limpiar comas aquí
+        descripcion = limpiar_comas(descripcion)  
 
         if not uuid or not tipo:
             return None
